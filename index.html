@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnosis Campaign Iklan Kamu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F6F4EE;
+    --ink: #1B1A17;
+    --ink-soft: #55534C;
+    --line: #DDD9CC;
+    --amber: #B9740A;
+    --amber-bg: #F5E6CC;
+    --orange: #E07A1F;
+    --teal: #0E6E5C;
+    --teal-bg: #DCEEE8;
+    --red: #A93A2C;
+    --red-bg: #F5DFDA;
+    --card: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+    min-height: 100vh;
+  }
+  .brand {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+    letter-spacing: 0.02em;
+  }
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0 0 20px;
+  }
+  h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+  p { margin: 0 0 16px; color: var(--ink-soft); font-size: 15px; }
+  .step-list { margin: 20px 0; padding: 0; list-style: none; }
+  .step-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14.5px;
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-num {
+    flex-shrink: 0;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--amber-bg);
+    color: var(--amber);
+    font-size: 12px;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .progress-track {
+    height: 3px;
+    background: var(--line);
+    border-radius: 2px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--amber);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .opt {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--card);
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.45;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .opt .ex { display: block; color: var(--ink-soft); font-size: 13px; margin-top: 4px; }
+  .opt:hover { border-color: var(--amber); background: #FFFBF3; }
+  .opt:active { transform: scale(0.99); }
+  .opt.selected { border-color: var(--amber); background: var(--amber-bg); }
+  .btn-primary {
+    display: inline-block;
+    width: 100%;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    border-radius: 10px;
+    padding: 15px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+  }
+  .btn-primary:hover { background: #34322C; }
+  .btn-orange {
+    display: block;
+    width: 100%;
+    background: var(--orange);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15.5px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+  }
+  .btn-orange:hover { background: #C96812; }
+  .btn-back {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: transparent;
+    border: none;
+    color: var(--ink-soft);
+    font-size: 14px;
+    cursor: pointer;
+    padding: 14px 0 0;
+  }
+  .btn-back:hover { color: var(--ink); }
+  input[type="text"], input[type="number"] {
+    width: 100%;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 13px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  input:focus { outline: none; border-color: var(--amber); }
+  label {
+    display: block;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+    margin-top: 16px;
+  }
+  label:first-of-type { margin-top: 0; }
+  .field-error {
+    color: var(--red);
+    font-size: 13px;
+    margin: -2px 0 12px;
+    display: none;
+  }
+  .field-error.show { display: block; }
+  .badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 4px;
+  }
+  .badge.teal { background: var(--teal-bg); color: var(--teal); }
+  .badge.amber { background: var(--amber-bg); color: var(--amber); }
+  .badge.red { background: var(--red-bg); color: var(--red); }
+  .result-block {
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+    margin-top: 16px;
+  }
+  .result-block:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+  .metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 14px;
+  }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-val { font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
+  .conclusion-box {
+    background: var(--amber-bg);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 16px;
+    font-size: 14.5px;
+  }
+  .conclusion-box.final {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .conclusion-box.final p { color: #D9D6CC; margin: 0; }
+  .cta-block {
+    margin-top: 4px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px;
+    text-align: center;
+  }
+  .cta-block h2 { margin-bottom: 10px; }
+  .cta-block p { margin-bottom: 20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">Diagnosis Campaign Iklan</div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="app"></div>
+</div>
+
+<script>
+// ============================================================
+// KONFIGURASI — GANTI SEBELUM DIPAKAI LIVE
+// ============================================================
+const WHATSAPP_NUMBER = "6282130956475";
+const LEAD_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxHjkzr-9uYLI-oeG9E4BLW2yVjaVqSVpylHwmdm8Kmlkpy3UA21qaGr0ctFe9OvLGjcQ/exec";
+
+// ============================================================
+// DATA PERTANYAAN — domain + alasan per opsi (buat narasi hasil)
+// ============================================================
+const quizQuestions = [
+  {
+    domain: "market",
+    q: "Pesan atau klaim yang kamu pakai di iklan selama ini, dasarnya apa?",
+    options: [
+      { key: "A", text: "Udah kebukti — dari hasil riset, data nyata, atau testimoni", ex: "Misal: \"70% pelanggan bilang ini bikin lebih pede\"" },
+      { key: "B", text: "Menurutku masuk akal, tapi belum pernah dicek beneran", ex: "Misal: \"kayaknya orang butuh ini deh\"" },
+      { key: "C", text: "Aku pilih karena kedengerannya menarik aja", ex: "Misal: asal ambil kalimat yang catchy" }
+    ],
+    reasonGood: "klaim yang kamu pakai di iklan sudah berdasar riset atau bukti nyata",
+    reasonMid: "klaim yang kamu pakai masih sebatas asumsi, belum divalidasi",
+    reasonBad: "klaim yang kamu pakai dipilih cuma karena kedengeran menarik, tanpa dasar jelas"
+  },
+  {
+    domain: "message",
+    q: "Iklan kamu selama ini lebih sering ngomongin masalah yang mereka rasain, atau hasil yang mereka pengen capai?",
+    options: [
+      { key: "A", text: "Sengaja pilih salah satu, sesuai riset target market", ex: "Misal: fokus ke \"susah cari waktu olahraga\" karena itu yang paling sering dikeluhkan" },
+      { key: "B", text: "Kadang masalah, kadang hasil, ga terlalu konsisten", ex: "Misal: satu iklan bahas masalah, iklan lain tiba-tiba bahas hasil akhir" },
+      { key: "C", text: "Ga kepikiran soal ini, yang penting kedengeran menjual", ex: "Misal: asal gabung kata-kata yang \"laku\"" }
+    ],
+    reasonGood: "framing pesan kamu (masalah atau hasil) dipilih sengaja sesuai riset target market",
+    reasonMid: "framing pesan kamu masih gonta-ganti, kurang konsisten",
+    reasonBad: "framing pesan kamu nggak dipikirkan, asal kedengeran menjual"
+  },
+  {
+    domain: "market",
+    q: "Target market kamu itu udah spesifik ke 1 tipe orang tertentu, atau masih \"siapa aja yang butuh produk ini\"?",
+    options: [
+      { key: "A", text: "Spesifik, aku tahu persis siapa yang aku tuju", ex: "Misal: \"ibu bekerja usia 28-35 yang baru punya anak pertama\"" },
+      { key: "B", text: "Ada gambaran, tapi masih cukup luas", ex: "Misal: \"wanita yang peduli kesehatan\"" },
+      { key: "C", text: "Masih general, belum kepikiran spesifik ke siapa", ex: "Misal: \"siapa aja yang butuh produk ini\"" }
+    ],
+    reasonGood: "target market kamu udah spesifik ke 1 tipe orang tertentu",
+    reasonMid: "target market kamu masih tergambar, tapi cukup luas",
+    reasonBad: "target market kamu masih general, belum spesifik ke siapa"
+  },
+  {
+    domain: "message",
+    q: "Konten iklan kamu dibuat berdasarkan 1 sudut pandang atau pesan tertentu, atau asal bikin yang menarik?",
+    options: [
+      { key: "A", text: "Sengaja pilih 1 sudut pandang dan konsisten dipakai", ex: "Misal: selalu pakai sudut \"hemat waktu\" di semua konten" },
+      { key: "B", text: "Kadang ada sudut pandangnya, kadang cuma ikut-ikutan tren", ex: "Misal: minggu ini ikut format yang lagi viral" },
+      { key: "C", text: "Ga mikirin sudut pandang sama sekali, asal jalan", ex: "Misal: asal bikin konten yang \"kayaknya bagus\"" }
+    ],
+    reasonGood: "konten kamu konsisten pakai 1 sudut pandang",
+    reasonMid: "angle konten kamu kadang ada, kadang cuma ikut tren",
+    reasonBad: "konten kamu dibuat asal, tanpa angle yang jelas"
+  },
+  {
+    domain: "offer",
+    q: "Penawaran kamu (harga, bonus, dan lainnya) itu dirancang berdasarkan apa?",
+    options: [
+      { key: "A", text: "Ada alasan jelas kenapa harga dan bonusnya seperti itu", ex: "Misal: harga dihitung dari margin + riset kompetitor, bonus melengkapi produk utama" },
+      { key: "B", text: "Ada harga dan sedikit bonus, tapi ga terlalu dipikirin alasannya", ex: "Misal: kasih bonus supaya \"keliatan menarik aja\"" },
+      { key: "C", text: "Cuma pasang harga aja, ga mikir penawaran lebih dari itu", ex: "Misal: ga ada bonus atau elemen tambahan sama sekali" }
+    ],
+    reasonGood: "penawaran (harga dan bonus) kamu dirancang dengan alasan yang jelas",
+    reasonMid: "penawaran kamu ada, tapi kurang dipikirkan alasannya",
+    reasonBad: "penawaran kamu cuma pasang harga, tanpa elemen tambahan"
+  },
+  {
+    domain: "offer",
+    q: "Ada sesuatu yang bikin orang yakin ini bakal berhasil buat mereka? (garansi, testimoni, bukti nyata)",
+    options: [
+      { key: "A", text: "Ada garansi jelas dan bukti nyata", ex: "Misal: \"garansi uang kembali\" + testimoni asli ditampilkan" },
+      { key: "B", text: "Ada salah satu aja, garansi atau bukti", ex: "Misal: cuma bilang \"puas atau uang kembali\" tanpa testimoni pendukung" },
+      { key: "C", text: "Ga ada sama sekali, cuma janji doang", ex: "Misal: \"dijamin bagus\" tanpa penjelasan lebih" }
+    ],
+    reasonGood: "ada garansi dan bukti nyata yang meyakinkan calon pembeli",
+    reasonMid: "cuma ada salah satu — garansi atau bukti, nggak dua-duanya",
+    reasonBad: "nggak ada garansi atau bukti sama sekali, cuma janji"
+  }
+];
+
+const QUESTION_LABELS = [
+  "Dasar Klaim Iklan (Market)",
+  "Framing Pesan (Message)",
+  "Spesifisitas Target Market (Market)",
+  "Konsistensi Angle (Message)",
+  "Dasar Penawaran (Offer)",
+  "Bukti/Garansi (Offer)"
+];
+
+const CTR_BENCHMARK = { statis: 1.5, video: 1.0 };
+const CPC_BENCHMARK = 1000;
+
+const FUNNEL_LABELS = { ctwa: "CTWA", lpwa: "LPWA", short: "Short", full: "Full" };
+
+const commonMetricFields = [
+  { key: "impressions", label: "Impressions (Tayangan)" },
+  { key: "cpm", label: "CPM (Biaya per 1000 Tayangan, Rp)" },
+  { key: "linkClicks", label: "Link Clicks (Klik Tautan)" }
+];
+const funnelExtraFields = {
+  ctwa: [
+    { key: "realLead", label: "Real Lead (Percakapan)" }
+  ],
+  lpwa: [
+    { key: "lpView", label: "LP View (Tayangan Halaman Landas)" },
+    { key: "atc", label: "ATC (Tambah ke Keranjang)" }
+  ],
+  short: [
+    { key: "lpView", label: "LP View (Tayangan Halaman Landas)" },
+    { key: "atc", label: "ATC (Tambah ke Keranjang)" }
+  ],
+  full: [
+    { key: "lpView", label: "LP View (Tayangan Halaman Landas)" },
+    { key: "atc", label: "ATC (Tambah ke Keranjang)" },
+    { key: "initiateCheckout", label: "Initiate Checkout (Checkout Dimulai)" },
+    { key: "purchase", label: "Purchase (Pembelian)" }
+  ]
+};
+
+const metricInfo = {
+  ctr: {
+    label: "CTR (Rasio Klik-Tayang)",
+    desc: "Menunjukkan seberapa menarik konten iklan kamu buat orang yang lihat.",
+    watch: "Kalau rendah, biasanya konten atau pesannya kurang related sama yang lihat."
+  },
+  cpc: {
+    label: "CPC (Biaya per Klik)",
+    desc: "Menunjukkan seberapa efisien biaya buat dapetin 1 klik ke iklan kamu.",
+    watch: "Kalau tinggi, bisa jadi kualitas konten kurang menarik atau targeting kurang tepat."
+  },
+  realLeadRate: {
+    label: "% Real Lead (Klik ke Percakapan)",
+    desc: "Menunjukkan seberapa banyak yang klik iklan beneran lanjut chat.",
+    watch: "Kalau rendah, kemungkinan yang klik bukan yang serius, atau ada hambatan pas mau chat."
+  },
+  oclp: {
+    label: "% OCLP (Klik ke Halaman Landas)",
+    desc: "Menunjukkan seberapa cepat halaman landas muncul setelah orang klik.",
+    watch: "Kalau rendah, biasanya halaman landas lambat atau ada masalah teknis."
+  },
+  lpToAtc: {
+    label: "% LP to ATC",
+    desc: "Menunjukkan seberapa tertarik orang dengan penawaran setelah lihat halaman landas.",
+    watch: "Kalau di bawah standar, biasanya penawaran kurang menarik atau halaman kurang meyakinkan."
+  },
+  atcToIc: {
+    label: "% ATC to Initiate Checkout",
+    desc: "Menunjukkan kemudahan orang lanjut ke proses checkout.",
+    watch: "Kalau rendah, biasanya proses checkout ribet atau ada hambatan teknis."
+  },
+  icToPurchase: {
+    label: "% IC to Purchase",
+    desc: "Menunjukkan kemudahan orang menyelesaikan pembayaran.",
+    watch: "Kalau rendah, biasanya pilihan pembayaran terbatas atau prosesnya ribet."
+  }
+};
+
+const BENCHMARKS = {
+  realLeadRate: 80,
+  oclp: 70,
+  lpToAtc: {
+    lpwa: { min: 10 },
+    short: { min: 5, max: 10 },
+    full: { min: 5, max: 10 }
+  },
+  atcToIc: 70,
+  icToPurchase: 70
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let state = {
+  step: 0,
+  answers: [],
+  hasAds: null,
+  funnelType: null,
+  productType: null,
+  contentType: null,
+  metrics: {},
+  name: "",
+  waNumber: "",
+  leadId: ""
+};
+
+const totalSteps = 13;
+
+function setProgress(current) {
+  const pct = Math.min(100, Math.round((current / totalSteps) * 100));
+  document.getElementById("progressFill").style.width = pct + "%";
+}
+
+function getPrevStep(step) {
+  if (step === 12) return state.hasAds ? 11 : 7;
+  return step - 1;
+}
+
+function goBack() {
+  state.step = getPrevStep(state.step);
+  render();
+}
+
+function appendBackButton(container) {
+  const btn = document.createElement("button");
+  btn.className = "btn-back";
+  btn.textContent = "← Kembali";
+  btn.onclick = goBack;
+  container.appendChild(btn);
+}
+
+function render() {
+  const app = document.getElementById("app");
+  app.innerHTML = "";
+
+  if (state.step === 0) return renderIntro(app);
+  if (state.step >= 1 && state.step <= 6) return renderQuestion(app, state.step - 1);
+  if (state.step === 7) return renderHasAds(app);
+  if (state.step === 8) return renderFunnelType(app);
+  if (state.step === 9) return renderProductType(app);
+  if (state.step === 10) return renderContentType(app);
+  if (state.step === 11) return renderMetricsInput(app);
+  if (state.step === 12) return renderGate(app);
+  if (state.step === 13) return renderResult(app);
+}
+
+function renderIntro(app) {
+  setProgress(0);
+  app.innerHTML = `
+    <h1>Cek kenapa campaign iklan kamu belum kasih hasil</h1>
+    <p>Ada 2 bagian singkat sebelum kamu dapat hasil diagnosisnya:</p>
+    <ul class="step-list">
+      <li><span class="step-num">1</span><span><b>Quiz</b> — 6 pertanyaan cepat soal cara kamu bikin pesan dan penawaran iklan selama ini</span></li>
+      <li><span class="step-num">2</span><span><b>Kalkulator</b> — kalau kamu udah pernah ngiklan, angka campaign kamu dicek juga</span></li>
+    </ul>
+    <div class="card">
+      <button class="btn-primary" id="startBtn">Mulai</button>
+    </div>
+  `;
+  document.getElementById("startBtn").onclick = () => { state.step = 1; render(); };
+}
+
+function renderQuestion(app, idx) {
+  setProgress(idx + 1);
+  const q = quizQuestions[idx];
+  const sectionLabel = idx < 4 ? "Quiz" : "Quiz — bagian penawaran";
+  app.innerHTML = `
+    <div class="section-label">${sectionLabel}</div>
+    <div class="card">
+      <h2>${q.q}</h2>
+      <div id="opts"></div>
+    </div>
+  `;
+  const optsWrap = document.getElementById("opts");
+  q.options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.className = "opt" + (state.answers[idx] === opt.key ? " selected" : "");
+    btn.innerHTML = opt.text + `<span class="ex">${opt.ex}</span>`;
+    btn.onclick = () => {
+      state.answers[idx] = opt.key;
+      state.step = idx < 5 ? state.step + 1 : 7;
+      render();
+    };
+    optsWrap.appendChild(btn);
+  });
+  if (state.step > 1) appendBackButton(app);
+}
+
+function renderHasAds(app) {
+  setProgress(7);
+  app.innerHTML = `
+    <div class="section-label">Kalkulator</div>
+    <div class="card">
+      <h2>Kamu udah pernah jalanin iklan sebelumnya?</h2>
+      <p>Kalau udah, kita cek juga angka campaign kamu di bagian ini.</p>
+      <div id="opts"></div>
+    </div>
+  `;
+  const optsWrap = document.getElementById("opts");
+  const yesBtn = document.createElement("button");
+  yesBtn.className = "opt" + (state.hasAds === true ? " selected" : "");
+  yesBtn.textContent = "Udah pernah";
+  yesBtn.onclick = () => { state.hasAds = true; state.step = 8; render(); };
+  const noBtn = document.createElement("button");
+  noBtn.className = "opt" + (state.hasAds === false ? " selected" : "");
+  noBtn.textContent = "Belum pernah";
+  noBtn.onclick = () => { state.hasAds = false; state.step = 12; render(); };
+  optsWrap.appendChild(yesBtn);
+  optsWrap.appendChild(noBtn);
+  appendBackButton(app);
+}
+
+function renderFunnelType(app) {
+  setProgress(8);
+  app.innerHTML = `
+    <div class="section-label">Kalkulator</div>
+    <div class="card">
+      <h2>Funnel yang kamu pakai apa?</h2>
+      <div id="opts"></div>
+    </div>
+  `;
+  const optsWrap = document.getElementById("opts");
+  Object.keys(FUNNEL_LABELS).forEach(key => {
+    const btn = document.createElement("button");
+    btn.className = "opt" + (state.funnelType === key ? " selected" : "");
+    btn.textContent = FUNNEL_LABELS[key];
+    btn.onclick = () => { state.funnelType = key; state.step = 9; render(); };
+    optsWrap.appendChild(btn);
+  });
+  appendBackButton(app);
+}
+
+function renderProductType(app) {
+  setProgress(9);
+  app.innerHTML = `
+    <div class="section-label">Kalkulator</div>
+    <div class="card">
+      <h2>Produk kamu jenisnya apa?</h2>
+      <div id="opts"></div>
+    </div>
+  `;
+  const optsWrap = document.getElementById("opts");
+  ["Produk fisik", "Produk digital"].forEach(type => {
+    const btn = document.createElement("button");
+    btn.className = "opt" + (state.productType === type ? " selected" : "");
+    btn.textContent = type;
+    btn.onclick = () => { state.productType = type; state.step = 10; render(); };
+    optsWrap.appendChild(btn);
+  });
+  appendBackButton(app);
+}
+
+function renderContentType(app) {
+  setProgress(10);
+  app.innerHTML = `
+    <div class="section-label">Kalkulator</div>
+    <div class="card">
+      <h2>Konten iklan kamu bentuknya statis (gambar) atau video?</h2>
+      <div id="opts"></div>
+    </div>
+  `;
+  const optsWrap = document.getElementById("opts");
+  const statisBtn = document.createElement("button");
+  statisBtn.className = "opt" + (state.contentType === "statis" ? " selected" : "");
+  statisBtn.textContent = "Statis / gambar";
+  statisBtn.onclick = () => { state.contentType = "statis"; state.step = 11; render(); };
+  const videoBtn = document.createElement("button");
+  videoBtn.className = "opt" + (state.contentType === "video" ? " selected" : "");
+  videoBtn.textContent = "Video";
+  videoBtn.onclick = () => { state.contentType = "video"; state.step = 11; render(); };
+  optsWrap.appendChild(statisBtn);
+  optsWrap.appendChild(videoBtn);
+  appendBackButton(app);
+}
+
+function renderMetricsInput(app) {
+  setProgress(11);
+  const fields = commonMetricFields.concat(funnelExtraFields[state.funnelType] || []);
+  let fieldsHtml = "";
+  fields.forEach(f => {
+    const val = state.metrics[f.key] !== undefined ? state.metrics[f.key] : "";
+    fieldsHtml += `
+      <label for="m_${f.key}">${f.label}</label>
+      <input type="number" id="m_${f.key}" value="${val}" placeholder="0">
+      <div class="field-error" id="m_${f.key}Error">Isi angkanya dulu</div>
+    `;
+  });
+  app.innerHTML = `
+    <div class="section-label">Kalkulator</div>
+    <div class="card">
+      <h2>Masukin angka campaign kamu</h2>
+      <p>Ambil langsung dari Ads Manager, sesuai funnel ${FUNNEL_LABELS[state.funnelType]} yang kamu pilih.</p>
+      ${fieldsHtml}
+      <div style="margin-top:20px;">
+        <button class="btn-primary" id="nextBtn">Lanjut</button>
+      </div>
+    </div>
+  `;
+  document.getElementById("nextBtn").onclick = () => {
+    let valid = true;
+    const values = {};
+    fields.forEach(f => {
+      const raw = document.getElementById("m_" + f.key).value;
+      if (raw === "" || isNaN(raw)) {
+        document.getElementById("m_" + f.key + "Error").classList.add("show");
+        valid = false;
+      } else {
+        document.getElementById("m_" + f.key + "Error").classList.remove("show");
+        values[f.key] = parseFloat(raw);
+      }
+    });
+    if (!valid) return;
+    state.metrics = values;
+    state.step = 12;
+    render();
+  };
+  appendBackButton(app);
+}
+
+function renderGate(app) {
+  setProgress(12);
+  app.innerHTML = `
+    <div class="card">
+      <h2>Hasil diagnosis kamu udah siap</h2>
+      <p>Isi nama dan nomor WhatsApp kamu untuk lihat hasilnya. Nanti kalau kamu mau tanya lebih lanjut, kamu bisa langsung chat dari sana.</p>
+      <label for="nameInput">Nama sapaan</label>
+      <input type="text" id="nameInput" value="${state.name}" placeholder="Nama kamu">
+      <div class="field-error" id="nameError">Isi nama kamu dulu</div>
+      <label for="waInput">Nomor WhatsApp</label>
+      <input type="text" id="waInput" value="${state.waNumber}" placeholder="628xxxxxxxxxx">
+      <div class="field-error" id="waError">Masukin nomor WhatsApp yang valid</div>
+      <div style="margin-top:14px;">
+        <button class="btn-primary" id="showResultBtn">Lihat hasil diagnosis</button>
+      </div>
+    </div>
+  `;
+  document.getElementById("showResultBtn").onclick = () => {
+    const name = document.getElementById("nameInput").value.trim();
+    const wa = document.getElementById("waInput").value.trim();
+    const normalized = normalizeWhatsApp(wa);
+    let valid = true;
+    if (name === "") {
+      document.getElementById("nameError").classList.add("show");
+      valid = false;
+    } else {
+      document.getElementById("nameError").classList.remove("show");
+    }
+    if (normalized.length < 10) {
+      document.getElementById("waError").classList.add("show");
+      valid = false;
+    } else {
+      document.getElementById("waError").classList.remove("show");
+    }
+    if (!valid) return;
+    state.name = name;
+    state.waNumber = normalized;
+    state.leadId = generateLeadId();
+    submitLead();
+    state.step = 13;
+    render();
+  };
+  appendBackButton(app);
+}
+
+function normalizeWhatsApp(raw) {
+  let digits = raw.replace(/\D/g, "");
+  if (digits.startsWith("0")) {
+    digits = "62" + digits.slice(1);
+  } else if (!digits.startsWith("62")) {
+    digits = "62" + digits;
+  }
+  return digits;
+}
+
+// ID unik: YYMMDD-XXXX (4 karakter acak alfanumerik huruf besar)
+function generateLeadId() {
+  const now = new Date();
+  const yy = String(now.getFullYear()).slice(-2);
+  const mm = String(now.getMonth() + 1).padStart(2, "0");
+  const dd = String(now.getDate()).padStart(2, "0");
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let rand = "";
+  for (let i = 0; i < 4; i++) rand += chars[Math.floor(Math.random() * chars.length)];
+  return `${yy}${mm}${dd}-${rand}`;
+}
+
+function submitLead() {
+  if (!LEAD_WEBHOOK_URL) return;
+  const quizAnswers = quizQuestions.map((q, i) => {
+    const opt = q.options.find(o => o.key === state.answers[i]);
+    return { label: QUESTION_LABELS[i], text: `${state.answers[i]}. ${opt.text}` };
+  });
+  const rates = state.hasAds ? computeRates(state.funnelType, state.metrics) : {};
+  const payload = {
+    leadId: state.leadId,
+    name: state.name,
+    waNumber: Number(state.waNumber),
+    waLink: `https://wa.me/${state.waNumber}`,
+    quizAnswers: quizAnswers,
+    hasAds: state.hasAds,
+    funnelType: state.funnelType,
+    productType: state.productType,
+    contentType: state.contentType,
+    metrics: state.metrics,
+    rates: rates,
+    timestamp: new Date().toISOString()
+  };
+  fetch(LEAD_WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(payload)
+  }).catch(() => {});
+}
+
+// ============================================================
+// SKORING — 3 domain: market, message, offer
+// ============================================================
+function getDomainQuestionIdx(domain) {
+  const result = [];
+  quizQuestions.forEach((q, idx) => { if (q.domain === domain) result.push(idx); });
+  return result;
+}
+
+function scoreLevel(answers) {
+  const points = { A: 2, B: 1, C: 0 };
+  const total = answers.reduce((sum, a) => sum + points[a], 0);
+  const max = answers.length * 2;
+  const pct = max > 0 ? total / max : 0;
+  if (pct >= 0.875) return "solid";
+  if (pct >= 0.625) return "oke";
+  if (pct >= 0.375) return "rapuh";
+  return "sangat_rapuh";
+}
+
+const domainLevelLabel = {
+  solid: { text: "Solid", badge: "teal" },
+  oke: { text: "Oke", badge: "teal" },
+  rapuh: { text: "Rapuh", badge: "amber" },
+  sangat_rapuh: { text: "Sangat Rapuh", badge: "red" }
+};
+
+const WEAK_LEVELS = ["rapuh", "sangat_rapuh"];
+const domainTitle = { market: "Market", message: "Message", offer: "Offer" };
+
+function reasonFor(q, answerKey) {
+  if (answerKey === "A") return q.reasonGood;
+  if (answerKey === "B") return q.reasonMid;
+  return q.reasonBad;
+}
+
+function domainNarrative(domain, level) {
+  const idxs = getDomainQuestionIdx(domain);
+  const reasons = idxs.map(i => reasonFor(quizQuestions[i], state.answers[i]));
+  const r1 = reasons[0], r2 = reasons[1];
+  if (level === "solid") return `Ini solid karena ${r1}, dan ${r2}.`;
+  if (level === "oke") return `Sudah lumayan — ${r1}, dan ${r2}. Tinggal dipertajam sedikit lagi.`;
+  if (level === "rapuh") return `Kemungkinan karena ${r1}, dan ${r2}.`;
+  return `Kemungkinan besar karena ${r1}, dan ${r2} — ini bagian yang paling perlu dibangun ulang.`;
+}
+
+// ============================================================
+// KALKULATOR — hitung rate dari angka mentah
+// ============================================================
+function computeRates(funnelType, m) {
+  const rates = {};
+  rates.ctr = m.impressions > 0 ? (m.linkClicks / m.impressions) * 100 : null;
+  const estSpend = (m.cpm / 1000) * m.impressions;
+  rates.cpc = m.linkClicks > 0 ? estSpend / m.linkClicks : null;
+
+  if (funnelType === "ctwa") {
+    rates.realLeadRate = m.linkClicks > 0 ? (m.realLead / m.linkClicks) * 100 : null;
+  } else {
+    rates.oclp = m.linkClicks > 0 ? (m.lpView / m.linkClicks) * 100 : null;
+    rates.lpToAtc = m.lpView > 0 ? (m.atc / m.lpView) * 100 : null;
+    if (funnelType === "full") {
+      rates.atcToIc = m.atc > 0 ? (m.initiateCheckout / m.atc) * 100 : null;
+      rates.icToPurchase = m.initiateCheckout > 0 ? (m.purchase / m.initiateCheckout) * 100 : null;
+    }
+  }
+  return rates;
+}
+
+function getBenchmark(key, funnelType, contentType) {
+  if (key === "ctr") return CTR_BENCHMARK[contentType];
+  if (key === "cpc") return CPC_BENCHMARK;
+  if (key === "lpToAtc") return BENCHMARKS.lpToAtc[funnelType];
+  return BENCHMARKS[key];
+}
+
+function evaluateMetric(key, actual, benchmark) {
+  const isCost = key === "cpc";
+  if (typeof benchmark === "object") {
+    const below = actual < benchmark.min;
+    const display = benchmark.max ? `${benchmark.min}% - ${benchmark.max}%` : `> ${benchmark.min}%`;
+    return { below, display };
+  }
+  const below = isCost ? actual > benchmark : actual < benchmark;
+  const display = isCost ? "Rp" + benchmark.toLocaleString('id-ID') : benchmark + "%";
+  return { below, display };
+}
+
+function calcStatusFromRatio(ratio) {
+  if (ratio === 0) return { text: "Baik", badge: "teal" };
+  if (ratio < 0.5) return { text: "Warning", badge: "amber" };
+  return { text: "Critical", badge: "red" };
+}
+
+function renderResult(app) {
+  setProgress(13);
+
+  const domains = ["market", "message", "offer"];
+  const domainLevels = {};
+  domains.forEach(d => {
+    const idxs = getDomainQuestionIdx(d);
+    const answers = idxs.map(i => state.answers[i]);
+    domainLevels[d] = scoreLevel(answers);
+  });
+
+  const weakDomains = domains.filter(d => WEAK_LEVELS.includes(domainLevels[d]));
+  const strongDomains = domains.filter(d => !WEAK_LEVELS.includes(domainLevels[d]));
+
+  let quizSummary;
+  if (weakDomains.length === 0) {
+    quizSummary = `Semua fondasi (${domains.map(d => domainTitle[d]).join(', ')}) kamu ada di level Oke atau lebih — tinggal dipertajam sedikit lagi.`;
+  } else if (weakDomains.length === domains.length) {
+    quizSummary = `Ketiga fondasi (${domains.map(d => domainTitle[d]).join(', ')}) kamu masih di bawah level Oke — ini semua perlu dibenahi dari awal.`;
+  } else {
+    quizSummary = `${weakDomains.length} dari ${domains.length} fondasi masih di bawah level Oke: ${weakDomains.map(d => domainTitle[d]).join(', ')}. ${strongDomains.map(d => domainTitle[d]).join(', ')} udah oke, tapi itu belum cukup nutupin kekurangan di ${weakDomains.map(d => domainTitle[d]).join(' dan ')}.`;
+  }
+
+  // Box A: Quiz
+  let domainBlocksHtml = "";
+  domains.forEach(d => {
+    const level = domainLevels[d];
+    const info = domainLevelLabel[level];
+    domainBlocksHtml += `
+      <div class="result-block">
+        <div class="badge ${info.badge}">${domainTitle[d]}: ${info.text}</div>
+        <p style="margin-top:8px;">${domainNarrative(d, level)}</p>
+      </div>
+    `;
+  });
+  let boxA = `
+    <div class="card">
+      <div class="section-label">Hasil Quiz — Market, Message & Offer</div>
+      ${domainBlocksHtml}
+      <div class="conclusion-box"><p style="margin:0;color:var(--ink);">${quizSummary}</p></div>
+    </div>
+  `;
+
+  // Box B: Kalkulator
+  let boxB = "";
+  let anyBelow = false;
+  let calcStatusInfo = null;
+  let belowCount = 0, totalMetrics = 0;
+  if (state.hasAds) {
+    const rates = computeRates(state.funnelType, state.metrics);
+    let rowsHtml = "";
+    const order = ["ctr", "cpc", "realLeadRate", "oclp", "lpToAtc", "atcToIc", "icToPurchase"];
+    order.forEach(key => {
+      if (rates[key] === undefined || rates[key] === null) return;
+      totalMetrics++;
+      const info = metricInfo[key];
+      const benchmark = getBenchmark(key, state.funnelType, state.contentType);
+      const evalResult = evaluateMetric(key, rates[key], benchmark);
+      if (evalResult.below) { belowCount++; anyBelow = true; }
+      const isCost = key === "cpc";
+      const valDisplay = isCost ? "Rp" + Math.round(rates[key]).toLocaleString('id-ID') : rates[key].toFixed(1) + "%";
+      rowsHtml += `
+        <div class="result-block">
+          <div class="badge ${evalResult.below ? 'red' : 'teal'}">${evalResult.below ? (isCost ? 'Di atas benchmark' : 'Di bawah benchmark') : 'Sesuai atau lebih baik dari benchmark'}</div>
+          <h3>${info.label}</h3>
+          <div class="metric-row"><span>Hasil kamu</span><span class="metric-val">${valDisplay}</span></div>
+          <div class="metric-row"><span>Benchmark</span><span class="metric-val">${evalResult.display}</span></div>
+          <p style="margin-top:8px;font-size:13.5px;">${info.desc} ${evalResult.below ? info.watch : ""}</p>
+        </div>
+      `;
+    });
+    const ratio = totalMetrics > 0 ? belowCount / totalMetrics : 0;
+    calcStatusInfo = calcStatusFromRatio(ratio);
+    const calcConclusion = calcStatusInfo.text === "Baik"
+      ? "Status Baik: semua angka kamu udah sesuai atau lebih baik dari standar umum — dari sisi eksekusi, campaign kamu sudah berjalan baik."
+      : calcStatusInfo.text === "Warning"
+        ? `Status Warning: ${belowCount} dari ${totalMetrics} metrik di bawah standar — belum kritis, tapi ini bagian yang perlu mulai dibenahi.`
+        : `Status Critical: ${belowCount} dari ${totalMetrics} metrik di bawah standar — ini sudah cukup signifikan, perlu segera dibenahi duluan.`;
+    boxB = `
+      <div class="card">
+        <div class="section-label">Hasil Kalkulator</div>
+        <div class="badge ${calcStatusInfo.badge}" style="margin-bottom:12px;">Status: ${calcStatusInfo.text}</div>
+        ${rowsHtml}
+        <div class="conclusion-box"><p style="margin:0;color:var(--ink);">${calcConclusion}</p></div>
+      </div>
+    `;
+  }
+
+  // Box C: Kesimpulan Akhir
+  let finalConclusion;
+  const quizWeak = weakDomains.length >= 2;
+  const weakDomainNames = weakDomains.map(d => domainTitle[d]).join(', ');
+
+  if (state.hasAds) {
+    if (quizWeak && calcStatusInfo.text !== "Baik") {
+      finalConclusion = `Ini konsisten: ${weakDomainNames} di kuis kamu masih lemah, dan itu tercermin juga di angka campaign — ${belowCount} dari ${totalMetrics} metrik kalkulator (Status ${calcStatusInfo.text}) masih di bawah standar. Titik mulai yang paling masuk akal adalah membenahi ${weakDomainNames} dulu, karena kemungkinan besar itu akar masalahnya.`;
+    } else if (!quizWeak && calcStatusInfo.text !== "Baik") {
+      finalConclusion = `Fondasi kuis kamu sebagian besar udah oke (${strongDomains.map(d => domainTitle[d]).join(', ')} solid/oke)${weakDomains.length ? `, meski ${weakDomainNames} masih perlu diperkuat` : ''}. Tapi angka kalkulatornya masih Status ${calcStatusInfo.text} (${belowCount} dari ${totalMetrics} metrik di bawah standar). Kemungkinan besar ini bukan soal strategi, tapi soal eksekusi teknis — setup, targeting, atau kualitas produksi konten.`;
+    } else if (quizWeak && calcStatusInfo.text === "Baik") {
+      finalConclusion = `Menariknya, angka campaign kamu udah bagus (semua metrik kalkulator sesuai standar), tapi ${weakDomainNames} di kuis masih lemah. Ini kemungkinan hasil yang belum stabil — begitu kamu scale budget atau ganti target market, gap di ${weakDomainNames} ini bisa mulai kelihatan dampaknya.`;
+    } else {
+      finalConclusion = "Fondasi kuis dan angka campaign kamu sama-sama udah solid. Tinggal cari cara buat scale tanpa kehilangan kualitas ini.";
+    }
+  } else {
+    finalConclusion = quizSummary + " Karena kamu belum pernah ngiklan, langkah paling masuk akal adalah membenahi fondasi ini dulu sebelum mulai running campaign.";
+  }
+
+  const boxC = `
+    <div class="card">
+      <div class="section-label">Kesimpulan Akhir</div>
+      <div class="conclusion-box final"><p>${finalConclusion}</p></div>
+    </div>
+  `;
+
+  // Susun pesan WhatsApp otomatis
+  const domainLines = domains.map(d => `- ${domainTitle[d]}: ${domainLevelLabel[domainLevels[d]].text}`).join('\n');
+  const calcLine = state.hasAds
+    ? `\n- Kalkulator: Status ${calcStatusInfo.text} (${belowCount} dari ${totalMetrics} metrik di bawah standar)`
+    : '';
+  const waMessage = `Halo, saya ${state.name}. Baru selesai isi diagnosis campaign iklan.\n\nHasil saya:\n${domainLines}${calcLine}\n\nMau bahas hasil lebih detail, bisa kah?\n\nID: ${state.leadId}`;
+
+  app.innerHTML = `
+    <h1>Hasil diagnosis kamu</h1>
+    ${boxA}
+    ${boxB}
+    ${boxC}
+    <div class="cta-block">
+      <h2>Diskusiin Hasil Kamu Lebih Detail, Yuk?</h2>
+      <p>Itu baru gambaran dari jawaban singkat Kamu. Kalau mau dibahas lebih detail — sesuai kondisi bisnis Kamu sendiri — Yuk diskusiin hasil Kamu bareng Saya di WhatsApp, gratis.</p>
+      <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}" class="btn-orange">Lanjut Diskusi di WhatsApp</a>
+    </div>
+  `;
+}
+
+render();
+</script>
+</body>
+</html>
