@@ -6,28 +6,33 @@
 <title>Diagnosis Campaign Iklan Kamu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #F6F4EE;
-    --ink: #1B1A17;
-    --ink-soft: #55534C;
-    --line: #DDD9CC;
-    --amber: #B9740A;
-    --amber-bg: #F5E6CC;
-    --orange: #E07A1F;
-    --teal: #0E6E5C;
-    --teal-bg: #DCEEE8;
-    --red: #A93A2C;
-    --red-bg: #F5DFDA;
+    --paper: #FFFFFF;
+    --surface: #F5F6F2;
+    --ink: #1C1E1A;
+    --ink-soft: #6B6F63;
+    --line: #E5E7DE;
+    --accent: #FF4B33;
+    --accent-dark: #E63D26;
+    --accent-bg: #FFF4F2;
+    --amber: #A16207;
+    --amber-bg: #FBF0D9;
+    --orange: #FF4B33;
+    --teal: #2E6F5E;
+    --teal-bg: #E4F3EC;
+    --red: #B91C1C;
+    --red-bg: #F8E4E0;
     --card: #FFFFFF;
   }
   * { box-sizing: border-box; }
+  html { background: var(--surface); }
   body {
     margin: 0;
-    background: var(--paper);
+    background: var(--surface);
     color: var(--ink);
-    font-family: 'Inter', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
@@ -36,6 +41,17 @@
     margin: 0 auto;
     padding: 32px 20px 80px;
     min-height: 100vh;
+    background: var(--paper);
+  }
+  @media (min-width: 720px) {
+    body { padding: 40px 20px; }
+    .wrap {
+      min-height: auto;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 1px 2px rgba(28,30,26,0.04);
+      padding: 40px 44px 56px;
+    }
   }
   .brand {
     font-size: 13px;
@@ -46,9 +62,8 @@
   .section-label {
     font-size: 12px;
     font-weight: 600;
-    color: var(--amber);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    color: var(--accent);
+    letter-spacing: 0.02em;
     margin-bottom: 10px;
   }
   h1 {
@@ -87,8 +102,8 @@
     flex-shrink: 0;
     width: 24px; height: 24px;
     border-radius: 50%;
-    background: var(--amber-bg);
-    color: var(--amber);
+    background: var(--accent-bg);
+    color: var(--accent);
     font-size: 12px;
     font-weight: 600;
     display: flex; align-items: center; justify-content: center;
@@ -102,7 +117,7 @@
   }
   .progress-fill {
     height: 100%;
-    background: var(--amber);
+    background: var(--accent);
     border-radius: 2px;
     transition: width 0.3s ease;
     width: 0%;
@@ -123,7 +138,7 @@
     border-radius: 10px;
     padding: 14px 16px;
     margin-bottom: 10px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 14.5px;
     line-height: 1.45;
     color: var(--ink);
@@ -131,9 +146,9 @@
     transition: border-color 0.15s ease, background 0.15s ease;
   }
   .opt .ex { display: block; color: var(--ink-soft); font-size: 13px; margin-top: 4px; }
-  .opt:hover { border-color: var(--amber); background: #FFFBF3; }
+  .opt:hover { border-color: var(--accent); background: var(--accent-bg); }
   .opt:active { transform: scale(0.99); }
-  .opt.selected { border-color: var(--amber); background: var(--amber-bg); }
+  .opt.selected { border-color: var(--accent); background: var(--accent-bg); }
   .btn-primary {
     display: inline-block;
     width: 100%;
@@ -142,13 +157,13 @@
     border: none;
     border-radius: 10px;
     padding: 15px 20px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     text-align: center;
   }
-  .btn-primary:hover { background: #34322C; }
+  .btn-primary:hover { background: #34362E; }
   .btn-orange {
     display: block;
     width: 100%;
@@ -157,14 +172,14 @@
     border: none;
     border-radius: 10px;
     padding: 16px 20px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 15.5px;
     font-weight: 600;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
   }
-  .btn-orange:hover { background: #C96812; }
+  .btn-orange:hover { background: var(--accent-dark); }
   .btn-back {
     display: block;
     width: 100%;
@@ -182,11 +197,11 @@
     border: 1.5px solid var(--line);
     border-radius: 10px;
     padding: 13px 14px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 15px;
     margin-bottom: 6px;
   }
-  input:focus { outline: none; border-color: var(--amber); }
+  input:focus { outline: none; border-color: var(--accent); }
   label {
     display: block;
     font-size: 13px;
@@ -230,7 +245,7 @@
   .metric-row:last-child { border-bottom: none; }
   .metric-val { font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
   .conclusion-box {
-    background: var(--amber-bg);
+    background: var(--surface);
     border-radius: 10px;
     padding: 14px 16px;
     margin-top: 16px;
